@@ -36,6 +36,13 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+
+    <style name="normalText_black">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="black_textfield">
         <item name="android:textColorHint">@color/white</item>
         <item name="fontFamily">@font/poppins_medium</item>

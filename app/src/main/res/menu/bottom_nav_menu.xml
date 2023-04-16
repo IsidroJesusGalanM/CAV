@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Museos"
+        android:icon="@drawable/museum_2"/>
+
+    <item
+        android:id="@+id/events"
+        android:title="Eventos"
+        android:icon="@drawable/caballete"/>
+
+    <item
+        android:id="@+id/guides"
+        android:title="Guias"
+        android:icon="@drawable/guia_turistico"/>
+
+    <item
+        android:id="@+id/profile"
+        android:title="Perfil"
+        android:icon="@drawable/user"/>
+</menu>

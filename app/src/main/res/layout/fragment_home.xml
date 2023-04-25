@@ -12,4 +12,6 @@
         android:text="Home fragment"
         style="@style/normalText_black"/>
 
+
+
 </FrameLayout>

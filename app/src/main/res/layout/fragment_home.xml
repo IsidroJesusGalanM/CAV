@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home fragment"
+        android:text="Museos"
         android:textAlignment="center"
         style="@style/normalText_black"
         android:layout_margin="10dp"/>

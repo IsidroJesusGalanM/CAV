@@ -32,13 +32,55 @@
         app:layout_constraintTop_toBottomOf="@id/userImage"
         app:layout_constraintLeft_toLeftOf="@id/userImage"
         app:layout_constraintRight_toRightOf="@id/userImage"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:text="Cambiar Foto"
         android:fontFamily="@font/poppins_light"
         android:background="@drawable/change_user_image"
         android:elevation="20dp"
-        android:padding="8dp"
+        android:padding="4dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/change_user_image"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pay_methods"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/top_button_user_menu"
+            android:drawableStart="@drawable/pay_method_24"
+            android:text="Tus metodos de pago"
+            style="@style/button_design_user"
+            android:padding="20dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/my_tours"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/intermediate_button_user_menu"
+            android:drawableStart="@drawable/tours_24"
+            style="@style/button_design_user"
+            android:layout_marginTop="-1dp"
+            android:text="Mis Tours"
+            android:padding="20dp"/>
+
+
+
+
+
+    </LinearLayout>
+
+    
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

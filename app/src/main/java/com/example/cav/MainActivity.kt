@@ -17,10 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        
         setup()
         window.decorView.systemUiVisibility = 0
-
         supportActionBar?.hide()
     }
 

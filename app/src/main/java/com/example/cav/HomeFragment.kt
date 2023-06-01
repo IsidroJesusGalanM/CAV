@@ -1,5 +1,6 @@
 package com.example.cav
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +35,14 @@ class HomeFragment : Fragment(){
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         adapter.submitList(lista)
+
+        adapter.onItemClickListener = {
+            val intent = Intent(activity,details_museum_activity::class.java)
+                .putExtra("name",it.nombre)
+                .putExtra("descripcion",it.descL)
+                .putExtra("imagen",it.image)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroy() {

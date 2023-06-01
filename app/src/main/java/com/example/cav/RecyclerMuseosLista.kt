@@ -1,5 +1,6 @@
 package com.example.cav
 
+import android.content.DialogInterface.OnClickListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,13 +38,16 @@ class RecyclerMuseosLista(): ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHo
         holder.bind(museo)
     }
 
+    lateinit var onItemClickListener: (MuseosLista) -> Unit
 
-
-    class ViewHolder(private val binding:RecyclerMuseosListaBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding:RecyclerMuseosListaBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(museo:MuseosLista){
             binding.nombreMuseo.text = museo.nombre
             binding.descripcionCorta.text = museo.descC
             binding.imagenMuseo.setImageResource(museo.image)
+            binding.root.setOnClickListener {
+                onItemClickListener(museo)
+            }
         }
     }
 

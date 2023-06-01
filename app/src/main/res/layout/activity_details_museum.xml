@@ -16,6 +16,7 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:text="Museo soumaya"
         android:textSize="24sp"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:fontFamily="@font/poppins_medium"/>
 
@@ -30,7 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/imageMuseum"
+        android:textAlignment="center"
         android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_light"
         />
 
 

@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:text="Museos"
         android:textAlignment="center"
-        style="@style/normalText_black"
-        android:layout_margin="10dp"/>
+        style="@style/titleTextStyle"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

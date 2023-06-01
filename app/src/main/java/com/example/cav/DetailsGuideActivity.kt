@@ -29,6 +29,7 @@ class DetailsGuideActivity : AppCompatActivity() {
         binding.calif.text = calif.toString()
         binding.nombreGuiaA.text = nombre
         binding.descripcion.text = desc
+        binding.especialidadA.text = especialidad
 
     }
 }

@@ -11,7 +11,8 @@
         android:id="@+id/nombre_GuiaA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_guideA"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
         style="@style/titleTextStyle"
         tools:text="Isidro jesus"
@@ -22,29 +23,42 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"/>
+        />
 
     <ImageView
         android:id="@+id/estrella"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/star"
-        app:layout_constraintTop_toBottomOf="@id/image_guideA"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
+        app:layout_constraintLeft_toRightOf="@id/calif"
         />
+
+    <TextView
+        android:id="@+id/especialidadA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/descripcion"
+        style="@style/normalPlainTextStyle"
+        tools:text="Historia de mexico"/>
+
 
     <TextView
         android:id="@+id/calif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="5.0"
-        app:layout_constraintRight_toLeftOf="@id/estrella"
-        app:layout_constraintBottom_toBottomOf="@id/estrella"
+        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
+        app:layout_constraintLeft_toLeftOf="parent"
         style="@style/normalPlainTextStyle"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/estrella"
         />
 
     <TextView
@@ -52,10 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/estrella"
-        android:layout_marginTop="10dp"
         style="@style/normalPlainTextStyle"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+
         android:elegantTextHeight="true"
         />
 

@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         style="@style/title_black_text"
-        android:layout_margin="20dp"
         android:text="Isidro Jesus Galan Muñoz"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -22,7 +21,7 @@
         app:layout_constraintRight_toRightOf="@id/nameID"
         app:layout_constraintLeft_toLeftOf="@id/nameID"
         app:layout_constraintTop_toBottomOf="@id/nameID"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/muestra"/>
@@ -41,7 +40,8 @@
         android:paddingEnd="10dp"
         android:paddingStart="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,6 +50,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
+        android:layout_marginTop="16dp"
         >
 
         <androidx.appcompat.widget.AppCompatButton
@@ -73,7 +74,27 @@
             android:text="Mis Tours"
             android:padding="20dp"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/edit_information"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/intermediate_button_user_menu"
+            android:drawableStart="@drawable/edit"
+            style="@style/button_design_user"
+            android:layout_marginTop="-1dp"
+            android:text="Editar Infromación"
+            android:padding="20dp"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/servicio"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/bottom_button_bg"
+            android:drawableStart="@drawable/question"
+            android:text="Preguntas Frecuentes"
+            android:layout_marginTop="-1dp"
+            style="@style/button_design_user"
+            android:padding="20dp"/>
 
 
 

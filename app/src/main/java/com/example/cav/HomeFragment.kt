@@ -31,6 +31,8 @@ class HomeFragment : Fragment(){
         lista.add(MuseosLista(2,"Centro cultural universitario Tlatelolco","A este vestigio de la arquitectura modernista le ha sido imposible pasar inadvertido durante los últimos dos años",
             "del artista estadounidense Thomas Glassford, la cual rodea el edificio de 22 pisos. Enclavado en los linderos de la unidad habitacional que le da nombre, el Centro Cultural Universitario Tlatelolco ofrece tres exposiciones permanentes: la muestra multimedia Memorial del 68, Colección Stavenhagen –de arte prehispánico– y Museo Tlatelolco, conformada por piezas prehispánicas localizadas en la zona arqueológica adyacente al foro.",
             300,R.drawable.centro_estudiantil_tlate))
+
+
         val adapter = RecyclerMuseosLista()
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)

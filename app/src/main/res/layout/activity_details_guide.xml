@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".DetailsGuideActivity">
+
+    <TextView
+        android:id="@+id/nombre_GuiaA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        style="@style/titleTextStyle"
+        tools:text="Isidro jesus"
+        />
+
+    <ImageView
+        android:id="@+id/image_guideA"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:id="@+id/estrella"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/star"
+        app:layout_constraintTop_toBottomOf="@id/image_guideA"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/calif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="5.0"
+        app:layout_constraintRight_toLeftOf="@id/estrella"
+        app:layout_constraintBottom_toBottomOf="@id/estrella"
+        style="@style/normalPlainTextStyle"
+        />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/estrella"
+        android:layout_marginTop="10dp"
+        style="@style/normalPlainTextStyle"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:elegantTextHeight="true"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,16 +2,14 @@ package com.example.cav
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.cav.databinding.ActivityMytoursBinding
+import com.example.cav.databinding.ActivityFrecuentQuestionBinding
 
-class MytoursActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMytoursBinding
+class FrecuentQuestionActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFrecuentQuestionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMytoursBinding.inflate(layoutInflater)
+        binding = ActivityFrecuentQuestionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
     }
 }

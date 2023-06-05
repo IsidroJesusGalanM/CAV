@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp"
-    android:layout_margin="16dp"
-    android:background="@drawable/rounded_rectangule"
+    android:layout_margin="4dp"
+    android:background="@drawable/custom_card_museums"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
@@ -17,7 +17,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
         tools:text="Museo Soumaya"/>
 
     <ImageView
@@ -28,17 +29,20 @@
         android:scaleType="centerCrop"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
         android:layout_height="250dp"/>
 
     <TextView
         android:id="@+id/descripcionCorta"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/imagenMuseo"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#B3FFFFFF"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="lorem ipsum"/>
 

@@ -82,7 +82,7 @@
             android:drawableStart="@drawable/edit"
             style="@style/button_design_user"
             android:layout_marginTop="-1dp"
-            android:text="Editar Infromación"
+            android:text="Editar Informacion"
             android:padding="20dp"/>
 
         <androidx.appcompat.widget.AppCompatButton

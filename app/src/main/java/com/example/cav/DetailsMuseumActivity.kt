@@ -3,6 +3,8 @@ package com.example.cav
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cav.databinding.ActivityDetailsMuseumBinding
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 class details_museum_activity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsMuseumBinding
@@ -22,9 +24,17 @@ class details_museum_activity : AppCompatActivity() {
         val desc = Bundle?.getString("descripcion")
         val img = Bundle?.getInt("imagen")
 
+        val list = mutableListOf<CarouselItem>()
+        list.add(CarouselItem(R.drawable.sou))
+        list.add(CarouselItem(R.drawable.to))
+
+        val carrusel: ImageCarousel = binding.imageMuseum
+        carrusel.addData(list)
+
         binding.nameMuseum.text = nombre
-        binding.imageMuseum.setImageResource(img!!)
         binding.descLarga.text = desc
+
+
     }
 
 

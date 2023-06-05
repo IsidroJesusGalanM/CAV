@@ -71,6 +71,18 @@
         android:elegantTextHeight="true"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/new_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_customization"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Hacer Reservación"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/calendar_icon"
+        android:padding="10dp"
+        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

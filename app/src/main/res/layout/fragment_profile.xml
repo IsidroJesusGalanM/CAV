@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        style="@style/title_black_text"
+        style="@style/titleTextStyle"
         android:text="Isidro Jesus Galan Muñoz"
         app:layout_constraintTop_toTopOf="parent"/>
 

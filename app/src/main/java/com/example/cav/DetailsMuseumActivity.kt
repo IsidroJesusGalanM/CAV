@@ -22,9 +22,11 @@ class details_museum_activity : AppCompatActivity() {
         val desc = Bundle?.getString("descripcion")
         val img = Bundle?.getInt("imagen")
 
-        binding.nameMuseum.text = nombre
         binding.imageMuseum.setImageResource(img!!)
+        binding.nameMuseum.text = nombre
         binding.descLarga.text = desc
+
+
     }
 
 

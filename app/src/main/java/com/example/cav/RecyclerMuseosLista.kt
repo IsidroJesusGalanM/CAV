@@ -8,7 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.cav.databinding.RecyclerMuseosListaBinding
+import com.google.android.material.elevation.ElevationOverlayProvider
+import kotlin.coroutines.coroutineContext
 
 class RecyclerMuseosLista(): ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHolder>(DiffCallback) {
 
@@ -44,7 +49,13 @@ class RecyclerMuseosLista(): ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHo
         fun bind(museo:MuseosLista){
             binding.nombreMuseo.text = museo.nombre
             binding.descripcionCorta.text = museo.descC
-            binding.imagenMuseo.setImageResource(museo.image)
+            val imagen = binding.imagenMuseo
+            Glide
+                .with(binding.root)
+                .load(museo.image)
+                .apply(RequestOptions().transform(RoundedCorners(40)))
+                .into(imagen)
+
             binding.root.setOnClickListener {
                 onItemClickListener(museo)
             }

@@ -25,6 +25,7 @@ class HomeFragment : Fragment(){
     }
 
     private fun setup() {
+
         val lista = mutableListOf<MuseosLista>()
         lista.add(MuseosLista(1,"Museo Soumaya","Un museo de carlos Slim el cual retrata todo el amor hacia su esposa",
             "Un museo en el cual te llenaras de experiencias con tu familia y que tendras momentos inolvidables",200,R.drawable.sou))

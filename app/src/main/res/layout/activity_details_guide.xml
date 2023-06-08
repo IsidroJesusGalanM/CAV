@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@color/black"
     tools:context=".DetailsGuideActivity">
 
     <TextView
@@ -33,8 +34,9 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/star"
-        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
-        app:layout_constraintLeft_toRightOf="@id/calif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="8.5dp"
         />
 
     <TextView
@@ -42,9 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/descripcion"
         style="@style/normalPlainTextStyle"
+        android:layout_marginTop="10dp"
         tools:text="Historia de mexico"/>
 
 
@@ -53,24 +56,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="5.0"
-        app:layout_constraintTop_toBottomOf="@id/nombre_GuiaA"
-        app:layout_constraintLeft_toLeftOf="parent"
         style="@style/normalPlainTextStyle"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/estrella"
+        android:textSize="24sp"
+        app:layout_constraintRight_toLeftOf="@id/estrella"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <TextView
         android:id="@+id/descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/estrella"
+        app:layout_constraintTop_toBottomOf="@id/especialidadA"
         style="@style/normalPlainTextStyle"
-
+        android:layout_marginTop="16dp"
         android:elegantTextHeight="true"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/calif"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/white_button_1"
+        android:drawableStart="@drawable/agendar_cita_2"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Agendar Cita"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@ class RecyclerGuideLista(): ListAdapter<GuidesList,RecyclerGuideLista.ViewHolder
             binding.nombreGuia.text = guide.name
             binding.calif.text = guide.calif.toString()
             binding.especialidad.text = guide.especialidad
+
             binding.root.setOnClickListener {
                 onItemClickListener(guide)
             }

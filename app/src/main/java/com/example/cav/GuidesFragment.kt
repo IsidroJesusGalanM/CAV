@@ -29,15 +29,15 @@ class GuidesFragment : Fragment() {
     private fun setup() {
         val list = mutableListOf<GuidesList>()
 
-        list.add(GuidesList(1,"Isidro Jesus Galan Muñoz",4,"Historia de mexico",
+        list.add(GuidesList(1,"Isidro Jesus Galan Muñoz",4.31,"Historia de mexico",
             "Soy un apasionado de mi trackbar me encanta la historia y el compartirla con la gente",R.drawable.persona_ejemplo_1))
-        list.add(GuidesList(2,"Ximena Soberanis",5,"Recorrdios",
+        list.add(GuidesList(2,"Ximena Soberanis",5.31,"Recorrdios",
             "Soy sociable con la gente y facil de interactuar con ellos.",R.drawable.xime))
-        list.add(GuidesList(3,"Leslie Ayala",4,"Arte",
+        list.add(GuidesList(3,"Leslie Ayala",4.23,"Arte",
             "Interesada en poder interactuar con las persona sy mostrarles una nueva cara del arte en mexico",R.drawable.les))
-        list.add(GuidesList(4,"Annet Gonzalez",3,"Historia Prehispanica",
+        list.add(GuidesList(4,"Annet Gonzalez",3.90,"Historia Prehispanica",
             "Me gusta compartir la cara antigua de mexico de forma dinamica para los extrageros",R.drawable.an))
-        list.add(GuidesList(5,"Eder Salvador Villegas",4,"Historia Natural",
+        list.add(GuidesList(5,"Eder Salvador Villegas",4.90,"Historia Natural",
             "Soy un experto en la ciencias de la naturaleza, me gusta compartir la biodeviersidad que es de mexico ",R.drawable.ed))
 
 

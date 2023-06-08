@@ -4,7 +4,6 @@
     android:layout_height="150dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
-
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -23,9 +22,11 @@
         android:layout_height="wrap_content"
         tools:text="Isidro Jesus"
         style="@style/normalPlainTextStyle"
+        android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/image_guide"
         app:layout_constraintTop_toTopOf="@id/image_guide"
         android:layout_marginStart="16dp"
+        android:textColor="#67C5AB"
         />
 
     <TextView
@@ -37,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/nombre_Guia"
         app:layout_constraintLeft_toRightOf="@id/image_guide"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         />
 
     <TextView
@@ -68,7 +69,9 @@
         app:layout_constraintRight_toLeftOf="@id/estrella"
         app:layout_constraintBottom_toBottomOf="@id/estrella"
         tools:text="5.0"
+        android:textColor="@color/white"
         android:fontFamily="@font/poppins_light"
+        android:layout_marginEnd="4dp"
         />
 
 

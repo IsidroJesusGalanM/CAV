@@ -41,6 +41,11 @@ class ProfileFragment : Fragment() {
             val intent = Intent(context,MainActivity::class.java)
             startActivity(intent)
         }
+
+        val user = FirebaseAuth.getInstance().currentUser
+        val nombre = user?.displayName
+
+        binding.nameID.text = nombre
     }
 
     override fun onDestroy() {

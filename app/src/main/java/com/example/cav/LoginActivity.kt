@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.cav.databinding.ActivityLoginBinding
 import com.example.cav.databinding.ActivityRegisterBinding
@@ -33,22 +34,27 @@ class LoginActivity : AppCompatActivity() {
         binding.login.setOnClickListener {
             val email = binding.mail.text
             val password = binding.password.text
-            val sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email.toString(), password.toString())
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        //Establecer que estamos logeados
-                        val editor = sharedPreferences.edit()
-                        editor.putBoolean("login", true)
-                        editor.apply()
+            if (email.isNotEmpty() && password!!.isNotEmpty()) {
+                val sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
+                FirebaseAuth.getInstance()
+                    .signInWithEmailAndPassword(email.toString(), password.toString())
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            //Establecer que estamos logeados
+                            val editor = sharedPreferences.edit()
+                            editor.putBoolean("login", true)
+                            editor.apply()
 
-                        val intent = Intent(this,PrincipalActivity::class.java)
-                        startActivity(intent)
+                            val intent = Intent(this, PrincipalActivity::class.java)
+                            startActivity(intent)
 
-                    }else{
-                        showAlert()
+                        } else {
+                            showAlert()
+                        }
                     }
-                }
+            }else{
+                Toast.makeText(this, "Rellena los campos porfavor", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

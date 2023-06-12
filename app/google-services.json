@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1047477622666",
+    "project_id": "proyectocav-cf8df",
+    "storage_bucket": "proyectocav-cf8df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047477622666:android:013e27f225c3cb1a70da73",
+        "android_client_info": {
+          "package_name": "com.example.cav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047477622666-lreagf0pq7vbt3a4rmu3d99p8m09lp1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZLpLzSQyZ2WdtrTn00ao_XybRkbveGyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047477622666-lreagf0pq7vbt3a4rmu3d99p8m09lp1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.cav.databinding.ActivityPrincipalBinding
 
+
 class PrincipalActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityPrincipalBinding
     override fun onCreate(savedInstanceState: Bundle?) {

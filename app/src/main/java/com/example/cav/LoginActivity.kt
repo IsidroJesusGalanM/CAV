@@ -1,10 +1,17 @@
 package com.example.cav
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import androidx.appcompat.app.AlertDialog
 import com.example.cav.databinding.ActivityLoginBinding
 import com.example.cav.databinding.ActivityRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -24,8 +31,35 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.login.setOnClickListener {
-            val intent = Intent(this,PrincipalActivity::class.java)
-            startActivity(intent)
+            val email = binding.mail.text
+            val password = binding.password.text
+            val sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email.toString(), password.toString())
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        //Establecer que estamos logeados
+                        val editor = sharedPreferences.edit()
+                        editor.putBoolean("login", true)
+                        editor.apply()
+
+                        val intent = Intent(this,PrincipalActivity::class.java)
+                        startActivity(intent)
+
+                    }else{
+                        showAlert()
+                    }
+                }
         }
+    }
+
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Se ha prducido en el inicio de sesion ")
+        builder.setPositiveButton("OK", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
+
     }
 }

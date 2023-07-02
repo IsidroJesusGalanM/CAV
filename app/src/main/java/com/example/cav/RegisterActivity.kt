@@ -4,16 +4,23 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager.OnActivityResultListener
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.cav.databinding.ActivityRegisterBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityRegisterBinding
+    private  val googleSign = 12
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -78,4 +85,5 @@ class RegisterActivity : AppCompatActivity() {
         val dialog:AlertDialog = builder.create()
         dialog.show()
     }
+
 }

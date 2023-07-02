@@ -34,6 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.back.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
         }
         binding.registerButton.setOnClickListener {
             val user = binding.mail

@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
@@ -45,7 +46,8 @@ class RegisterActivity : AppCompatActivity() {
 
             if (user.text!!.isNotEmpty() && password.text!!.isNotEmpty() && confirmation.text!!.isNotEmpty() && name!!.isNotEmpty()) {
                 if (password.text.toString().equals(confirmation.text.toString())){
-                    Toast.makeText(this, "Password and confirmation match", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Las contraseñas coinciden", Toast.LENGTH_SHORT).show()
+
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.text.toString(),password.text.toString())
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
@@ -67,13 +69,26 @@ class RegisterActivity : AppCompatActivity() {
                             }else{
                                 showAlert()
                             }
+                            val db = FirebaseFirestore.getInstance()
+                            db.collection("Usuarios").document(user.text.toString()).set(
+                                hashMapOf(
+                                    "user" to user.text.toString(),
+                                    "nombre" to name.toString()
+                                ))
                         }
+
+
                 }else{
                     Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
                 }
+
             }else{
                 Toast.makeText(this, "Alguno de los campos esta Vacio", Toast.LENGTH_SHORT).show()
             }
+
+
+
+
             
         }
     }

@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.cav.databinding.RecyclerMuseosListaBinding
 import com.google.android.material.elevation.ElevationOverlayProvider
+import com.squareup.picasso.Picasso
 import kotlin.coroutines.coroutineContext
 
 class RecyclerMuseosLista(): ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHolder>(DiffCallback) {
@@ -50,12 +51,7 @@ class RecyclerMuseosLista(): ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHo
             binding.nombreMuseo.text = museo.nombre
             binding.descripcionCorta.text = museo.descC
             val imagen = binding.imagenMuseo
-            Glide
-                .with(binding.root)
-                .load(museo.image)
-                .apply(RequestOptions().transform(RoundedCorners(40)))
-                .into(imagen)
-
+            Picasso.get().load(museo.image).into(imagen)
             binding.root.setOnClickListener {
                 onItemClickListener(museo)
             }

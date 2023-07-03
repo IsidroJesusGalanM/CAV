@@ -3,6 +3,7 @@ package com.example.cav
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cav.databinding.ActivityDetailsMuseumBinding
+import com.squareup.picasso.Picasso
 
 class details_museum_activity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsMuseumBinding
@@ -20,9 +21,10 @@ class details_museum_activity : AppCompatActivity() {
 
         val nombre = Bundle?.getString("name")
         val desc = Bundle?.getString("descripcion")
-        val img = Bundle?.getInt("imagen")
+        val img = Bundle?.getString("imagen")
 
-        binding.imageMuseum.setImageResource(img!!)
+        val imagen = binding.imageMuseum
+        Picasso.get().load(img).into(imagen)
         binding.nameMuseum.text = nombre
         binding.descLarga.text = desc
 

@@ -20,7 +20,7 @@ class HomeFragment : Fragment(){
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -31,7 +31,6 @@ class HomeFragment : Fragment(){
     private fun setup() {
 
         val lista = mutableListOf<MuseosLista>()
-        var contador = 1
         val ref = db.collection("Museos")
 
 

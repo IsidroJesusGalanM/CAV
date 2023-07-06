@@ -23,13 +23,14 @@ class DetailsGuideActivity : AppCompatActivity() {
         val Bundle = intent.extras!!
 
         val nombre = Bundle.getString("nombre")
-        val image = Bundle.getInt("imagen")
+        val image = Bundle.getString("imagen")
         val desc = Bundle.getString("descripcion")
         val calif = Bundle.getDouble("calificacion")
         val especialidad = Bundle.getString("esp")
 
 
         val imageCorner = binding.imageGuideA
+
         binding.calif.text = calif.toString()
         binding.nombreGuiaA.text = nombre
         binding.descripcion.text = desc

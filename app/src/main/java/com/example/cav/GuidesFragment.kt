@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cav.databinding.FragmentGuidesBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class GuidesFragment : Fragment() {
     private var _binding:FragmentGuidesBinding? = null
     private val binding get() = _binding!!
+    private val db = FirebaseFirestore.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,31 +31,38 @@ class GuidesFragment : Fragment() {
     private fun setup() {
         val list = mutableListOf<GuidesList>()
 
-        list.add(GuidesList(1,"Isidro Jesus Galan Muñoz",4.31,"Historia de mexico",
-            "Soy un apasionado de mi trackbar me encanta la historia y el compartirla con la gente",R.drawable.persona_ejemplo_1))
-        list.add(GuidesList(2,"Ximena Soberanis",5.31,"Recorrdios",
-            "Soy sociable con la gente y facil de interactuar con ellos.",R.drawable.xime))
-        list.add(GuidesList(3,"Leslie Ayala",4.23,"Arte",
-            "Interesada en poder interactuar con las persona sy mostrarles una nueva cara del arte en mexico",R.drawable.les))
-        list.add(GuidesList(4,"Annet Gonzalez",3.90,"Historia Prehispanica",
-            "Me gusta compartir la cara antigua de mexico de forma dinamica para los extrageros",R.drawable.an))
-        list.add(GuidesList(5,"Eder Salvador Villegas",4.90,"Historia Natural",
-            "Soy un experto en la ciencias de la naturaleza, me gusta compartir la biodeviersidad que es de mexico ",R.drawable.ed))
+        val ref = db.collection("Guias")
+
+        ref.get().addOnSuccessListener { result ->
+            for (document in result){
+                val nombre = document.getString("Nombre")
+                val desc = document.getString("Desc")
+                val espec = document.getString("Especialidad")
+                val id = document.get("id")
+                val rating = document.get("Calif")
+                val image = document.getString("Imagen")
+
+                val guia = GuidesList(id.toString().toInt(),nombre.toString(),
+                    rating.toString().toDouble(),espec.toString(),desc.toString(),image.toString())
+
+                list.add(guia)
+                val adapter = RecyclerGuideLista()
+                binding.guidesRecycler.adapter = adapter
+                binding.guidesRecycler.layoutManager = LinearLayoutManager(context)
+                adapter.submitList(list)
+
+                adapter.onItemClickListener = {
+                    val intent = Intent(context, DetailsGuideActivity::class.java)
+                        .putExtra("nombre",it.name)
+                        .putExtra("imagen",it.foto)
+                        .putExtra("calificacion",it.calif)
+                        .putExtra("descripcion",it.descripcion)
+                        .putExtra("esp",it.especialidad)
+                    startActivity(intent)
+            }
+        }
 
 
-        val adapter = RecyclerGuideLista()
-        binding.guidesRecycler.adapter = adapter
-        binding.guidesRecycler.layoutManager = LinearLayoutManager(context)
-        adapter.submitList(list)
-
-        adapter.onItemClickListener = {
-            val intent = Intent(context, DetailsGuideActivity::class.java)
-                .putExtra("nombre",it.name)
-                .putExtra("imagen",it.foto)
-                .putExtra("calificacion",it.calif)
-                .putExtra("descripcion",it.descripcion)
-                .putExtra("esp",it.especialidad)
-            startActivity(intent)
         }
     }
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.cav.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
@@ -42,10 +43,19 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+        val db = FirebaseFirestore.getInstance()
+
+
         val user = FirebaseAuth.getInstance().currentUser
         val nombre = user?.displayName
 
         binding.nameID.text = nombre
+
+        binding.payMethods.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+        }
+        
     }
 
     override fun onDestroy() {

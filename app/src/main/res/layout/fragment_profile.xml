@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         style="@style/titleTextStyle"
-        android:text="Isidro Jesus Galan Muñoz"
+        android:text=""
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView

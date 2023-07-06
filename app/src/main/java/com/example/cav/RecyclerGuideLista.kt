@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.cav.databinding.FragmentGuidesBinding
 import com.example.cav.databinding.RecyclerGuidesListaBinding
 import com.example.cav.databinding.RecyclerMuseosListaBinding
+import com.squareup.picasso.Picasso
 
 class RecyclerGuideLista(): ListAdapter<GuidesList,RecyclerGuideLista.ViewHolder>(DiffCallback) {
     companion object DiffCallback: DiffUtil.ItemCallback<GuidesList>(){
@@ -40,7 +41,8 @@ class RecyclerGuideLista(): ListAdapter<GuidesList,RecyclerGuideLista.ViewHolder
 
     inner class ViewHolder(private val binding: RecyclerGuidesListaBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(guide:GuidesList){
-            binding.imageGuide.setImageResource(guide.foto)
+            val img = binding.imageGuide
+        Picasso.get().load(guide.foto).into(img)
             binding.nombreGuia.text = guide.name
             binding.calif.text = guide.calif.toString()
             binding.especialidad.text = guide.especialidad

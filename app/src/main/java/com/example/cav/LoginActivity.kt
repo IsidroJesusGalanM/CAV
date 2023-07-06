@@ -43,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
                             //Establecer que estamos logeados
                             val editor = sharedPreferences.edit()
                             editor.putBoolean("login", true)
+                            editor.putString("email",email.toString())
                             editor.apply()
 
                             val intent = Intent(this, PrincipalActivity::class.java)

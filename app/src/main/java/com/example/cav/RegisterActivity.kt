@@ -54,6 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                                 //Establecer que estamos logeados
                                 val editor = sharedPreferences.edit()
                                 editor.putBoolean("login", true)
+                                editor.putString("email", user.text.toString())
                                 editor.apply()
 
                                 //Darle un nombre de usuario

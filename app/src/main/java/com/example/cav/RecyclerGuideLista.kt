@@ -24,8 +24,6 @@ class RecyclerGuideLista(): ListAdapter<GuidesList,RecyclerGuideLista.ViewHolder
 
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = RecyclerGuidesListaBinding.inflate(layoutInflater,parent,false)

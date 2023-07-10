@@ -25,7 +25,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/muestra"/>
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/change_user_image"
@@ -98,6 +98,7 @@
             android:padding="20dp"/>
 
     </LinearLayout>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout"

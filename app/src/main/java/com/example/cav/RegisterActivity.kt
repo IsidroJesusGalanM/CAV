@@ -66,6 +66,7 @@ class RegisterActivity : AppCompatActivity() {
 
                                 val intent = Intent(this,PrincipalActivity::class.java)
                                 startActivity(intent)
+                                finish()
 
                             }else{
                                 showAlert()

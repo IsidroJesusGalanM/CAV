@@ -1,5 +1,6 @@
 package com.example.cav
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cav.databinding.ActivityDetailsMuseumBinding
@@ -28,6 +29,10 @@ class details_museum_activity : AppCompatActivity() {
         binding.nameMuseum.text = nombre
         binding.descLarga.text = desc
 
+        binding.programarVisita.setOnClickListener {
+            val intent = Intent(this,ProgramarVisitaActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

@@ -1,35 +1,27 @@
 package com.example.cav
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cav.databinding.FragmentHomeBinding
+import com.example.cav.databinding.ActivitySelectMuseoBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
+class SelectMuseoActivity : AppCompatActivity() {
 
-class HomeFragment : Fragment(){
-    private var _binding : FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-    private val db = FirebaseFirestore.getInstance()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    lateinit var binding: ActivitySelectMuseoBinding
+    val db = FirebaseFirestore.getInstance()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySelectMuseoBinding.inflate(layoutInflater)
         val view = binding.root
+        setContentView(view)
+
         setup()
-        return view
     }
 
     private fun setup() {
-
         val lista = mutableListOf<MuseosLista>()
         val ref = db.collection("Museos")
         ref.get().addOnSuccessListener { result ->
@@ -47,31 +39,21 @@ class HomeFragment : Fragment(){
                 lista.add(museo)
 
                 val adapter = RecyclerMuseosLista()
-                binding.recycler.adapter = adapter
-                binding.recycler.layoutManager = LinearLayoutManager(context)
+                binding.recyclerMuseos2.adapter = adapter
+                binding.recyclerMuseos2.layoutManager = LinearLayoutManager(this)
                 adapter.submitList(lista)
 
                 adapter.onItemClickListener = {
-                    val intent = Intent(activity,details_museum_activity::class.java)
-                        .putExtra("name",it.nombre)
-                        .putExtra("descripcion",it.descL)
-                        .putExtra("imagen",it.image)
+                    val intent = Intent(this,ProgramarVisitaActivity::class.java)
+                        .putExtra("nombreMuseo",it.nombre)
                     startActivity(intent)
+                    finish()
                 }
             }
         }.addOnFailureListener{
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
         }
-
-
-
-
-
-
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+
 }

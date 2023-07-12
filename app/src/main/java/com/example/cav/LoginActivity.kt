@@ -26,11 +26,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setup() {
+        // regresar al activity
         binding.back2.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+        // Inicio de sesion con firebase
         binding.login.setOnClickListener {
             val email = binding.mail.text
             val password = binding.password.text
@@ -60,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showAlert() {
+        //mostrar alerta de dialogo
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
         builder.setMessage("Se ha prducido en el inicio de sesion ")

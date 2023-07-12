@@ -17,6 +17,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.util.Locale
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -38,23 +39,23 @@ class RegisterActivity : AppCompatActivity() {
 
         }
         binding.registerButton.setOnClickListener {
-            val user = binding.mail
+            val user = binding.mail.text.toString().toLowerCase()
             val password = binding.password
             val confirmation = binding.confirmPassword
             val name = binding.name.text
             val sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
 
-            if (user.text!!.isNotEmpty() && password.text!!.isNotEmpty() && confirmation.text!!.isNotEmpty() && name!!.isNotEmpty()) {
+            if (user.isNotEmpty() && password.text!!.isNotEmpty() && confirmation.text!!.isNotEmpty() && name!!.isNotEmpty()) {
                 if (password.text.toString().equals(confirmation.text.toString())){
                     Toast.makeText(this, "Las contraseñas coinciden", Toast.LENGTH_SHORT).show()
 
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.text.toString(),password.text.toString())
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(user,password.text.toString())
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 //Establecer que estamos logeados
                                 val editor = sharedPreferences.edit()
                                 editor.putBoolean("login", true)
-                                editor.putString("email", user.text.toString())
+                                editor.putString("email", user.toString().toLowerCase(Locale.ROOT))
                                 editor.apply()
 
                                 //Darle un nombre de usuario
@@ -71,10 +72,11 @@ class RegisterActivity : AppCompatActivity() {
                             }else{
                                 showAlert()
                             }
+                            //registrar al usuario en la base de datos
                             val db = FirebaseFirestore.getInstance()
-                            db.collection("Usuarios").document(user.text.toString()).set(
+                            db.collection("Usuarios").document(user).set(
                                 hashMapOf(
-                                    "user" to user.text.toString(),
+                                    "user" to user,
                                     "nombre" to name.toString()
                                 ))
                         }

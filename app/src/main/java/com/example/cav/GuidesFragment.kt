@@ -61,8 +61,6 @@ class GuidesFragment : Fragment() {
                     startActivity(intent)
             }
         }
-
-
         }
     }
 

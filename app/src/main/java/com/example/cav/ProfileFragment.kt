@@ -55,22 +55,27 @@ class ProfileFragment : Fragment() {
         val email = user?.email.toString()
         Toast.makeText(context, email, Toast.LENGTH_SHORT).show()
 
-        val firestore = FirebaseFirestore.getInstance()
-        firestore.collection("Usuarios").document(email).get()
-            .addOnSuccessListener {
-                if (it.exists()){
-                    val urlFoto = it.getString("urlFoto")
-                    if (urlFoto != ""){
-                        Toast.makeText(context, urlFoto, Toast.LENGTH_SHORT).show()
-                        setImage(urlFoto.toString())
-                    }else{
-                        Toast.makeText(context, "Porfavor selecciona una foto ", Toast.LENGTH_SHORT).show()
+        try {
+            val firestore = FirebaseFirestore.getInstance()
+            firestore.collection("Usuarios").document(email).get()
+                .addOnSuccessListener {
+                    if (it.exists()) {
+                        if (it.contains("urlFoto")){
+                            val urlFoto = it.getString("urlFoto")
+                            if (urlFoto != "") {
+                                Toast.makeText(context, urlFoto, Toast.LENGTH_SHORT).show()
+                                setImage(urlFoto.toString())
+                            }
+                        }else{
+                            Toast.makeText(context, "Selecciona una foto", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                }.addOnFailureListener {
+                    Toast.makeText(context, "Sin registros", Toast.LENGTH_SHORT).show()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(context, "Sin registros", Toast.LENGTH_SHORT).show()
-            }
-
+        }catch (e: Exception) {
+            print("no image")
+        }
     }
 
     private fun setImage(uri: String) {
@@ -134,7 +139,6 @@ class ProfileFragment : Fragment() {
         val storageReference = firebaseStorage.getReference("UsuariosImg/$fileName")
         storageReference.putFile(imageUri).
                 addOnSuccessListener {
-
                     storageReference.downloadUrl.addOnSuccessListener {
                         val fotoURL = it.toString()
                         asignarFoto(fotoURL)
@@ -173,24 +177,26 @@ class ProfileFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
+                    }else{
+                        val newData = hashMapOf("urlFoto" to URL)
+                        firestore.collection("Usuarios").document(email.toString())
+                            .set(newData, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    context,
+                                    "Campo creado y asignado exitosamente",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }.addOnFailureListener{
+                                Toast.makeText(
+                                    context,
+                                    "No se creo ni se asigno exitosamente",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                     }
                 }else{
-                    val newData = hashMapOf("urlFoto" to URL)
-                    firestore.collection("Usuarios").document(email.toString())
-                        .set(newData, SetOptions.merge())
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                context,
-                                "Campo creado y asignado exitosamente",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }.addOnFailureListener{
-                            Toast.makeText(
-                                context,
-                                "No se creo ni se asigno exitosamente",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                    Toast.makeText(context, "No existen datos", Toast.LENGTH_SHORT).show()
                 }
             }.addOnFailureListener {
                 Toast.makeText(

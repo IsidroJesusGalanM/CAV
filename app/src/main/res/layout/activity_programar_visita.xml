@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="16dp"
+    tools:context=".ProgramarVisitaActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:text="Programar Visitar"
+        style="@style/title_white"
+        android:textSize="22sp"/>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Museo:"
+            style="@style/normalText_white"/>
+
+        <EditText
+            android:id="@+id/museoName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_textfield_1"
+            android:enabled="false"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/white"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selectMuseo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_button_1"
+            android:layout_marginTop="10dp"
+            android:text="Seleccionar Museo"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guia"
+            style="@style/normalText_white"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/guiaName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_textfield_1"
+            android:textColor="@color/white"
+            android:enabled="false"
+            android:layout_marginTop="6dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selectGuia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_button_1"
+            android:layout_marginTop="10dp"
+            android:text="Seleccionar Guia"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/normalText_white"
+            android:text="Fecha:" />
+
+        <EditText
+            android:id="@+id/fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_textfield_1"
+            android:textColor="@color/white"
+            android:enabled="false"
+            android:layout_marginTop="6dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selectDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_button_1"
+            android:textColor="@color/white"
+            android:text="Seleccionar Fecha"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hora:"
+            android:layout_marginTop="16dp"
+            style="@style/normalText_white"/>
+
+        <EditText
+            android:id="@+id/hora"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_marginTop="6dp"
+            android:enabled="false"
+            android:background="@drawable/black_textfield_1"/>
+
+        <Spinner
+            android:id="@+id/selectHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            />
+        
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerCite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/white_button_1"
+        android:text="Registrar Cita"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

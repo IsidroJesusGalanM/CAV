@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:background="@color/black"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/white_button_1"
+
+        >
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normalText_black"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            tools:text="17 de enero 2023"/>
+
+        <TextView
+            android:id="@+id/nombre_Museo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normalText_black"
+            tools:text="Museo de antropologia"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"/>
+
+
+        <TextView
+            android:id="@+id/nombre_Guia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/normalText_black"
+            android:layout_marginTop="10dp"
+            tools:text="Jose Ignacio"/>
+
+        <TextView
+            android:id="@+id/hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/normalText_black"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            tools:text="3:00"/>
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

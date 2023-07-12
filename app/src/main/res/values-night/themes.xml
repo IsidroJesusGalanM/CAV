@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="datePickerTheme" parent="android:Theme.Material.Dialog">
+        <item name="android:colorAccent">#000000</item>
+    </style>
 </resources>

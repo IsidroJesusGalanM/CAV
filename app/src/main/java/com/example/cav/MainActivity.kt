@@ -35,9 +35,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
+
         binding.loginAnimation.setAnimation(R.raw.woman)
         binding.loginAnimation.playAnimation()
-        binding.loginAnimation.repeatCount = 5
+        binding.loginAnimation.repeatCount = 10
 
         window.navigationBarColor = getColor(R.color.black)
 

@@ -1,6 +1,8 @@
 package com.example.cav
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,45 +31,51 @@ class HomeFragment : Fragment(){
     }
 
     private fun setup() {
+        val connected = isConnectedToInternet(requireContext())
+        if (connected) {
+            var id = 0
+            val lista = mutableListOf<MuseosLista>()
+            val ref = db.collection("Museos")
+            ref.get().addOnSuccessListener { result ->
+                for (document in result) {
+                    val nombre = document.getString("Nombre")
+                    id += 1
+                    val descL = document.getString("descL")
+                    val descC = document.getString("DescC")
+                    val precio = document.getString("Precio")
+                    val img = document.getString("Imagen")
+                    val museo = MuseosLista(
+                        id.toString().toInt(), nombre!!, descC.toString(),
+                        descL.toString(), precio.toString().toInt(), img.toString()
+                    )
+                    println(museo)
+                    lista.add(museo)
 
-        val lista = mutableListOf<MuseosLista>()
-        val ref = db.collection("Museos")
-        ref.get().addOnSuccessListener { result ->
-            for (document in result){
-                val nombre = document.getString("Nombre")
-                val id = document.get("id")
-                val descL = document.getString("descL")
-                val descC = document.getString("DescC")
-                val precio = document.getString("Precio")
-                val img = document.getString("Imagen")
-                val museo = MuseosLista(id.toString().toInt(), nombre!!, descC.toString(),
-                    descL.toString(), precio.toString().toInt(), img.toString()
-                )
-                println(museo)
-                lista.add(museo)
+                    val adapter = RecyclerMuseosLista()
+                    binding.recycler.adapter = adapter
+                    binding.recycler.layoutManager = LinearLayoutManager(context)
+                    adapter.submitList(lista)
 
-                val adapter = RecyclerMuseosLista()
-                binding.recycler.adapter = adapter
-                binding.recycler.layoutManager = LinearLayoutManager(context)
-                adapter.submitList(lista)
-
-                adapter.onItemClickListener = {
-                    val intent = Intent(activity,details_museum_activity::class.java)
-                        .putExtra("name",it.nombre)
-                        .putExtra("descripcion",it.descL)
-                        .putExtra("imagen",it.image)
-                    startActivity(intent)
+                    adapter.onItemClickListener = {
+                        val intent = Intent(activity, details_museum_activity::class.java)
+                            .putExtra("name", it.nombre)
+                            .putExtra("descripcion", it.descL)
+                            .putExtra("imagen", it.image)
+                        startActivity(intent)
+                    }
                 }
+            }.addOnFailureListener {
+                Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             }
-        }.addOnFailureListener{
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(requireContext(), "Sin conexion a internet", Toast.LENGTH_SHORT).show()
         }
+    }
 
-
-
-
-
-
+    fun isConnectedToInternet(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 
     override fun onDestroy() {

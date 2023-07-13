@@ -41,8 +41,6 @@ class PrincipalActivity : AppCompatActivity() {
         val preferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
         val email = preferences.getString("email","")
 
-        Toast.makeText(this, email.toString(), Toast.LENGTH_SHORT).show()
-
 
         val user = FirebaseAuth.getInstance().currentUser
         val mail = user?.email

@@ -31,6 +31,7 @@ class details_museum_activity : AppCompatActivity() {
 
         binding.programarVisita.setOnClickListener {
             val intent = Intent(this,ProgramarVisitaActivity::class.java)
+                .putExtra("nombreMuseo",nombre)
             startActivity(intent)
         }
 

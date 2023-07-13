@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
             finish()
-        }else{
-            Toast.makeText(this, "No estas logeado", Toast.LENGTH_SHORT).show()
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)

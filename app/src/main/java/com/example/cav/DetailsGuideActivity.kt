@@ -1,5 +1,6 @@
 package com.example.cav
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -39,5 +40,10 @@ class DetailsGuideActivity : AppCompatActivity() {
         Glide.with(this).load(image).apply(RequestOptions().transform(RoundedCorners(20)))
             .into(imageCorner)
 
+        binding.agendar.setOnClickListener {
+            val intent = Intent(this,ProgramarVisitaActivity::class.java)
+                .putExtra("nombreGuia",nombre)
+            startActivity(intent)
+        }
     }
 }

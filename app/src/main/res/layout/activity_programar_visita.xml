@@ -109,23 +109,27 @@
             android:layout_marginTop="16dp"
             style="@style/normalText_white"/>
 
-        <EditText
-            android:id="@+id/hora"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:layout_marginTop="6dp"
-            android:enabled="false"
-            android:background="@drawable/black_textfield_1"/>
+
 
         <Spinner
             android:id="@+id/selectHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
+            android:entries="@array/spinner_hours"
+            android:background="@drawable/white_button_1"
+            android:padding="8dp"
             />
         
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/pruebaText"
+        android:layout_width="match_parent"
+        style="@style/normalText_white"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        android:layout_marginTop="10dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerCite"

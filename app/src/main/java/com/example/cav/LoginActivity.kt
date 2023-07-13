@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.widget.Toast
@@ -62,13 +63,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showAlert() {
-        //mostrar alerta de dialogo
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
-        builder.setMessage("Se ha prducido en el inicio de sesion ")
-        builder.setPositiveButton("OK", null)
+        builder.setMessage("El usuario no existe")
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
         val dialog: AlertDialog = builder.create()
         dialog.show()
+        val positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
+        val spannableString = SpannableString("OK")
+        spannableString.setSpan(ForegroundColorSpan(Color.BLACK), 0, spannableString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        positiveButton.text = spannableString
 
 
     }

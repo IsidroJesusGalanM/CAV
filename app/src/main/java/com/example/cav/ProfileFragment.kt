@@ -53,7 +53,6 @@ class ProfileFragment : Fragment() {
         val nombre = user?.displayName
         binding.nameID.text = nombre
         val email = user?.email.toString()
-        Toast.makeText(context, email, Toast.LENGTH_SHORT).show()
 
         try {
             val firestore = FirebaseFirestore.getInstance()
@@ -63,7 +62,6 @@ class ProfileFragment : Fragment() {
                         if (it.contains("urlFoto")){
                             val urlFoto = it.getString("urlFoto")
                             if (urlFoto != "") {
-                                Toast.makeText(context, urlFoto, Toast.LENGTH_SHORT).show()
                                 setImage(urlFoto.toString())
                             }
                         }else{

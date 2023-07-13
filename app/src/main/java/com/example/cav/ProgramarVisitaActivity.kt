@@ -2,12 +2,21 @@ package com.example.cav
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.cav.databinding.ActivityProgramarVisitaBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ProgramarVisitaActivity : AppCompatActivity() {
     lateinit var binding: ActivityProgramarVisitaBinding
+    val db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProgramarVisitaBinding.inflate(layoutInflater)
@@ -35,17 +44,35 @@ class ProgramarVisitaActivity : AppCompatActivity() {
             if (guia != null){
                 sharedPreferences.edit().putString("nombreGuia",guia).apply()
             }
+
             //valores guardados
             val museoG = sharedPreferences.getString("nombreMuseo","")
             if (museoG == null){
                 sharedPreferences.edit().putString("nombreMuseo",museo).apply()
             }
-            binding.museoName.setText(museoG)
+            if(museoG?.isBlank() == false){
+                binding.selectMuseo.setText("Museo Seleccionado")
+                binding.selectMuseo.background = resources.getDrawable(R.drawable.green_button)
+                binding.selectMuseo.setTextColor(getColor(R.color.black))
+                val palomita = ContextCompat.getDrawable(this,R.drawable.palomita)
+                binding.selectMuseo.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,palomita,null)
+                binding.selectMuseo.setPaddingRelative(50,0,50,0)
+            }
 
             val guiaG = sharedPreferences.getString("nombreGuia","")
             if (guiaG == null){
                 sharedPreferences.edit().putString("nombreGuia",guia).apply()
             }
+            if (guiaG?.isBlank() == false){
+                binding.selectGuia.setText("Guia Seleccionado")
+                binding.selectGuia.background = resources.getDrawable(R.drawable.green_button)
+                binding.selectGuia.setTextColor(getColor(R.color.black))
+                val palomita = ContextCompat.getDrawable(this,R.drawable.palomita)
+                binding.selectGuia.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,palomita,null)
+                binding.selectGuia.setPaddingRelative(50,0,50,0)
+            }
+
+            binding.museoName.setText(museoG)
             binding.guiaName.setText(guiaG)
         }
 
@@ -63,6 +90,67 @@ class ProgramarVisitaActivity : AppCompatActivity() {
         binding.selectDate.setOnClickListener {
             showDateDialog()
         }
+
+        val spinner = binding.selectHora
+        val spinnerItems = resources.getStringArray(R.array.spinner_hours)
+
+        val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,spinnerItems)
+        spinner.adapter = arrayAdapter
+        spinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+        }
+        binding.registerCite.setOnClickListener {
+
+            val connected = isConnectedToInternet(this)
+            if (connected) {
+
+
+                val nombreMuseo = binding.museoName.text.toString()
+                val nombreGuia = binding.guiaName.text.toString()
+                val fecha = binding.fecha.text.toString()
+                val hora = binding.selectHora.selectedItem.toString()
+
+                if (nombreMuseo.isBlank() || nombreGuia.isBlank() || fecha.isBlank() || hora == "Selecciona una hora:") {
+                    Toast.makeText(this, "Algun campo esta vacio ", Toast.LENGTH_SHORT).show()
+                } else {
+
+
+                    val currentUserR = FirebaseAuth.getInstance().currentUser
+                    val mail = currentUserR?.email
+                    val textoFinal = "$nombreMuseo con $nombreGuia el dia $fecha a las $hora"
+                    binding.pruebaText.text = textoFinal
+
+                    val reference = db.collection("Citas")
+                    val nuevaCita =
+                        hashMapOf(
+                            "nombreMuseo" to nombreMuseo,
+                            "nombreGuia" to nombreGuia,
+                            "fecha" to fecha,
+                            "usuario" to mail,
+                            "hora" to hora,
+                        )
+
+                    reference.add(nuevaCita)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Cita Registrada con exito", Toast.LENGTH_SHORT)
+                                .show()
+                            val intent = Intent(this, PrincipalActivity::class.java)
+                            startActivity(intent)
+                            sharedPreferences.edit().clear().apply()
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }else{
+                Toast.makeText(this, "Revisa tu conexion", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     private fun showDateDialog() {
@@ -92,5 +180,16 @@ class ProgramarVisitaActivity : AppCompatActivity() {
             12 -> "Diciembre"
             else -> "Mes inválido"
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val sharedPreferences = this.getSharedPreferences("visit_data", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+    }
+    fun isConnectedToInternet(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 }

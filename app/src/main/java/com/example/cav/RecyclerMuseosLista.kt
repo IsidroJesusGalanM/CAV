@@ -16,7 +16,7 @@ import com.google.android.material.elevation.ElevationOverlayProvider
 import com.squareup.picasso.Picasso
 import kotlin.coroutines.coroutineContext
 
-class RecyclerMuseosLista(): ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHolder>(DiffCallback) {
+class RecyclerMuseosLista: ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHolder>(DiffCallback) {
 
     companion object DiffCallback:DiffUtil.ItemCallback<MuseosLista>(){
         override fun areItemsTheSame(oldItem: MuseosLista, newItem: MuseosLista): Boolean {

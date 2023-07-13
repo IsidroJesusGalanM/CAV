@@ -1,21 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     android:padding="16dp"
+    android:orientation="vertical"
     tools:context=".PreguntasFrecuentesActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="No hay preguntas frecuentes"
-        style="@style/normalText_white"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/title_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preguntas Frecuentes"
+                android:textAlignment="center"
+                android:textSize="18dp" />
+
+            <TextView
+                style="@style/title_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="¿Mis metodos de pago estan seguros?"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/normalText_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Claro, nuestros procesos de verificacion son confiables ademas de esatr certificados"
+                android:textSize="14sp" />
+
+            <TextView
+                style="@style/title_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="¿Cuáles son los horarios de apertura de los museos?"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/normalText_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Los horarios de apertura de los museos pueden variar. En nuestra aplicación, podrás encontrar información actualizada sobre los horarios de apertura de cada museo, incluyendo los días de la semana."
+                android:textSize="14sp" />
+
+            <TextView
+                style="@style/title_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="¿Es necesario reservar con anticipación para visitar un museo?"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/normalText_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text=" Si bien algunos museos pueden permitir visitas sin reserva previa, recomendamos encarecidamente realizar reservas con anticipación a través de nuestra aplicación. Esto te garantizará un acceso más fluido y te ayudará a evitar largas filas de espera."
+                android:textSize="14sp" />
+
+            <TextView
+                style="@style/title_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text=" ¿Hay descuentos disponibles para estudiantes, personas mayores o grupos grandes?"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/normalText_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Sí, muchos museos ofrecen descuentos para estudiantes, personas mayores y grupos grandes. En la aplicación, podrás encontrar información sobre posibles descuentos y cómo acceder a ellos. Recuerda que es posible que se requiera presentar identificación válida para poder disfrutar de estos descuentos."
+                android:textSize="14sp" />
+
+            <TextView
+                style="@style/title_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="¿Qué formas de pago se aceptan en la aplicación?"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/normalText_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="La aplicación acepta diversas formas de pago, como tarjetas de crédito y débito. Durante el proceso de reserva, se te mostrarán las opciones de pago disponibles, y podrás seleccionar la que mejor se adapte a tus necesidades."
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

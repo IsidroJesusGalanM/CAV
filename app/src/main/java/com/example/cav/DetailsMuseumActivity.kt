@@ -1,5 +1,6 @@
 package com.example.cav
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +35,9 @@ class details_museum_activity : AppCompatActivity() {
                 .putExtra("nombreMuseo",nombre)
             startActivity(intent)
         }
+
+        val sharedPreferences = this.getSharedPreferences("visit_data", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
 
     }
 

@@ -29,14 +29,13 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var imageUri : Uri
     lateinit var firebaseStorage : FirebaseStorage
+
     val user = FirebaseAuth.getInstance().currentUser
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
-
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater,container,false)
@@ -79,10 +78,10 @@ class ProfileFragment : Fragment() {
     private fun setImage(uri: String) {
         val imageView = binding.userImage
         Picasso.get().load(uri).into(imageView)
-
     }
 
     private fun setup() {
+
         binding.logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val shared = context?.getSharedPreferences("auth", Context.MODE_PRIVATE)
@@ -112,6 +111,7 @@ class ProfileFragment : Fragment() {
             val intent = Intent (context,PreguntasFrecuentesActivity::class.java)
             startActivity(intent)
         }
+
         binding.changeUserImage.setOnClickListener {
              val intent = Intent()
             intent.type = "image/*"
@@ -119,7 +119,6 @@ class ProfileFragment : Fragment() {
             startActivityForResult(intent,100)
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -129,6 +128,7 @@ class ProfileFragment : Fragment() {
         }
 
     }
+
 
     private fun UploadImage(imageUri: Uri) {
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())

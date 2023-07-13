@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Inicio de sesion con firebase
         binding.login.setOnClickListener {
+
             val email = binding.mail.text
             val password = binding.password.text
             if (email.isNotEmpty() && password!!.isNotEmpty()) {
@@ -55,6 +56,8 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             showAlert()
                         }
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Datos no encontrados", Toast.LENGTH_SHORT).show()
                     }
             }else{
                 Toast.makeText(this, "Rellena los campos porfavor", Toast.LENGTH_SHORT).show()

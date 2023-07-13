@@ -30,9 +30,9 @@ class MytoursActivity : AppCompatActivity() {
         val reference = firebase.collection("Citas")
         val query = reference.whereEqualTo("usuario",mail)
 
-         query.get().addOnSuccessListener {
-             if (!it.isEmpty){
-                 for(document in it){
+         query.get().addOnSuccessListener { result ->
+             if (!result.isEmpty){
+                 for(document in result){
                      val museum = document.getString("nombreMuseo")
                      val guide = document.getString("nombreGuia")
                      val fecha = document.getString("fecha")

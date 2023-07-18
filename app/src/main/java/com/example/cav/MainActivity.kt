@@ -20,12 +20,17 @@ class MainActivity : AppCompatActivity() {
 
         val preferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
         val loged = preferences.getBoolean("login",false)
+        val admin = preferences.getBoolean("isAdmin",false)
         if (loged) {
-            val intent = Intent(this, PrincipalActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (admin) {
+                val intent = Intent(this,ColabMainActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, PrincipalActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)

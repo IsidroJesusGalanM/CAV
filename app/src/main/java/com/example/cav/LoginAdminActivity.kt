@@ -11,48 +11,37 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.cav.databinding.ActivityLoginBinding
-import com.example.cav.databinding.ActivityRegisterBinding
+import com.example.cav.databinding.ActivityLoginAdminBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityLoginBinding
-    lateinit var firebase: FirebaseFirestore
+class LoginAdminActivity : AppCompatActivity() {
+    lateinit var binding: ActivityLoginAdminBinding
+    val fbFs = FirebaseFirestore.getInstance()
+    val fbauth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginAdminBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        firebase = FirebaseFirestore.getInstance()
         setup()
     }
 
     private fun setup() {
-        // regresar al activity
-        binding.back2.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        binding.adminLogin.setOnClickListener {
-            val intent = Intent(this, LoginAdminActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Inicio de sesion con firebase
         binding.login.setOnClickListener {
             val email = binding.mail.text.toString().toLowerCase()
-            val password = binding.password.text
+            val password = binding.password.text.toString()
 
-            if (email.isNotEmpty() && password!!.isNotEmpty()) {
-                firebase.collection("Usuarios").document(email.toString()).get()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                fbFs.collection("Guias").document(email.toString()).get()
                     .addOnSuccessListener {
                         if (it.exists()){
                             val isAdmin = it.getString("isAdmin")
-                            if (isAdmin.equals("0")) {
+                            if (isAdmin.equals("1")) {
                                 val sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
-                                FirebaseAuth.getInstance()
+                                fbauth
                                     .signInWithEmailAndPassword(email.toString(), password.toString())
                                     .addOnCompleteListener {
                                         if (it.isSuccessful) {
@@ -60,17 +49,17 @@ class LoginActivity : AppCompatActivity() {
                                             val editor = sharedPreferences.edit()
                                             editor.putBoolean("login", true)
                                             editor.putString("email",email.toString())
-                                            editor.putBoolean("isAdmin",false)
+                                            editor.putBoolean("isAdmin",true)
                                             editor.apply()
 
-                                            val intent = Intent(this, PrincipalActivity::class.java)
+                                            val intent = Intent(this, ColabMainActivity::class.java)
                                             startActivity(intent)
                                         } else {
                                             showAlert()
                                         }
                                     }
                             } else {
-                                Toast.makeText(this, "No es una cuenta de usuario", Toast.LENGTH_SHORT)
+                                Toast.makeText(this, "No es una cuenta de colaborador", Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }else{

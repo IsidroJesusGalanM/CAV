@@ -25,7 +25,6 @@
         android:layout_marginTop="40dp"
         style="@style/title_white"
         android:text="Registrate"
-
         />
 
     <TextView
@@ -85,11 +84,22 @@
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textViewRegister"
         android:background="@drawable/white_button_1"
         android:fontFamily="@font/jost_medium"
         android:text="Registrarse"
         android:textSize="16dp"
+        android:layout_marginBottom="8dp"
         />
+
+    <TextView
+        android:id="@+id/textViewRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrate como colaborador aqui"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/normalText_white"
+        android:textAlignment="center"
+        android:textSize="12sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

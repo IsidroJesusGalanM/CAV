@@ -23,18 +23,20 @@ class SelectGuiaActivity : AppCompatActivity() {
         val list = mutableListOf<GuidesList>()
 
         val ref = db.collection("Guias")
+        var id = 1
 
         ref.get().addOnSuccessListener { result ->
             for (document in result){
                 val nombre = document.getString("Nombre")
                 val desc = document.getString("Desc")
+                id +=1
                 val espec = document.getString("Especialidad")
-                val id = document.get("id")
                 val rating = document.get("Calif")
                 val image = document.getString("Imagen")
+                val email = document.getString("Correo")
 
                 val guia = GuidesList(id.toString().toInt(),nombre.toString(),
-                    rating.toString().toDouble(),espec.toString(),desc.toString(),image.toString())
+                    rating.toString().toDouble(),espec.toString(),desc.toString(),image.toString(),email.toString())
 
                 list.add(guia)
                 val adapter = RecyclerGuideLista()

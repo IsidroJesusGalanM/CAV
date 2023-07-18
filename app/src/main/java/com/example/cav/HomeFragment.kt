@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cav.databinding.FragmentHomeBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class HomeFragment : Fragment(){
@@ -26,49 +30,54 @@ class HomeFragment : Fragment(){
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
-        setup()
+        CoroutineScope(Dispatchers.Main).launch {
+            setup()
+        }
         return view
     }
 
-    private fun setup() {
-        val connected = isConnectedToInternet(requireContext())
-        if (connected) {
-            var id = 0
-            val lista = mutableListOf<MuseosLista>()
-            val ref = db.collection("Museos")
-            ref.get().addOnSuccessListener { result ->
-                for (document in result) {
-                    val nombre = document.getString("Nombre")
-                    id += 1
-                    val descL = document.getString("descL")
-                    val descC = document.getString("DescC")
-                    val precio = document.getString("Precio")
-                    val img = document.getString("Imagen")
-                    val museo = MuseosLista(
-                        id.toString().toInt(), nombre!!, descC.toString(),
-                        descL.toString(), precio.toString().toInt(), img.toString()
-                    )
-                    println(museo)
-                    lista.add(museo)
+    private suspend fun setup() {
+        withContext(Dispatchers.IO) {
+            val connected = isConnectedToInternet(requireContext())
+            if (connected) {
+                var id = 0
+                val lista = mutableListOf<MuseosLista>()
+                val ref = db.collection("Museos")
+                ref.get().addOnSuccessListener { result ->
+                    for (document in result) {
+                        val nombre = document.getString("Nombre")
+                        id += 1
+                        val descL = document.getString("descL")
+                        val descC = document.getString("DescC")
+                        val precio = document.getString("Precio")
+                        val img = document.getString("Imagen")
+                        val museo = MuseosLista(
+                            id.toString().toInt(), nombre!!, descC.toString(),
+                            descL.toString(), precio.toString().toInt(), img.toString()
+                        )
+                        println(museo)
+                        lista.add(museo)
 
-                    val adapter = RecyclerMuseosLista()
-                    binding.recycler.adapter = adapter
-                    binding.recycler.layoutManager = LinearLayoutManager(context)
-                    adapter.submitList(lista)
+                        val adapter = RecyclerMuseosLista()
+                        binding.recycler.adapter = adapter
+                        binding.recycler.layoutManager = LinearLayoutManager(context)
+                        adapter.submitList(lista)
 
-                    adapter.onItemClickListener = {
-                        val intent = Intent(activity, details_museum_activity::class.java)
-                            .putExtra("name", it.nombre)
-                            .putExtra("descripcion", it.descL)
-                            .putExtra("imagen", it.image)
-                        startActivity(intent)
+                        adapter.onItemClickListener = {
+                            val intent = Intent(activity, details_museum_activity::class.java)
+                                .putExtra("name", it.nombre)
+                                .putExtra("descripcion", it.descL)
+                                .putExtra("imagen", it.image)
+                            startActivity(intent)
+                        }
                     }
+                }.addOnFailureListener {
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Sin conexion a internet", Toast.LENGTH_SHORT)
+                    .show()
             }
-        }else{
-            Toast.makeText(requireContext(), "Sin conexion a internet", Toast.LENGTH_SHORT).show()
         }
     }
 

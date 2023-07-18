@@ -24,10 +24,11 @@ class SelectMuseoActivity : AppCompatActivity() {
     private fun setup() {
         val lista = mutableListOf<MuseosLista>()
         val ref = db.collection("Museos")
+        var id = 1
         ref.get().addOnSuccessListener { result ->
             for (document in result){
                 val nombre = document.getString("Nombre")
-                val id = document.get("id")
+                id +=1
                 val descL = document.getString("descL")
                 val descC = document.getString("DescC")
                 val precio = document.getString("Precio")

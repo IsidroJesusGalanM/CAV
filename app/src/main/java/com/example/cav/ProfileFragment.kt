@@ -20,6 +20,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -41,37 +45,43 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater,container,false)
         val view = binding.root
         setup()
-        recoverData()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            recoverData()
+
+        }
         firebaseStorage = FirebaseStorage.getInstance()
         return view
     }
 
 
-    private  fun recoverData(){
+    suspend fun recoverData(){
         //firebase data
-        val nombre = user?.displayName
-        binding.nameID.text = nombre
-        val email = user?.email.toString()
+        withContext(Dispatchers.IO){
+            val nombre = user?.displayName
+            binding.nameID.text = nombre
+            val email = user?.email.toString()
 
-        try {
-            val firestore = FirebaseFirestore.getInstance()
-            firestore.collection("Usuarios").document(email).get()
-                .addOnSuccessListener {
-                    if (it.exists()) {
-                        if (it.contains("urlFoto")){
-                            val urlFoto = it.getString("urlFoto")
-                            if (urlFoto != "") {
-                                setImage(urlFoto.toString())
+            try {
+                val firestore = FirebaseFirestore.getInstance()
+                firestore.collection("Usuarios").document(email).get()
+                    .addOnSuccessListener {
+                        if (it.exists()) {
+                            if (it.contains("urlFoto")){
+                                val urlFoto = it.getString("urlFoto")
+                                if (urlFoto != "") {
+                                    setImage(urlFoto.toString())
+                                }
+                            }else{
+                                Toast.makeText(context, "Selecciona una foto", Toast.LENGTH_SHORT).show()
                             }
-                        }else{
-                            Toast.makeText(context, "Selecciona una foto", Toast.LENGTH_SHORT).show()
                         }
+                    }.addOnFailureListener {
+                        Toast.makeText(context, "Sin registros", Toast.LENGTH_SHORT).show()
                     }
-                }.addOnFailureListener {
-                    Toast.makeText(context, "Sin registros", Toast.LENGTH_SHORT).show()
-                }
-        }catch (e: Exception) {
-            print("no image")
+            }catch (e: Exception) {
+                print("no image")
+            }
         }
     }
 
@@ -86,7 +96,7 @@ class ProfileFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             val shared = context?.getSharedPreferences("auth", Context.MODE_PRIVATE)
             val editor = shared?.edit()
-            editor?.putBoolean("login", false)
+            editor?.clear()
             editor?.apply()
 
             val intent = Intent(context,MainActivity::class.java)
@@ -144,13 +154,9 @@ class ProfileFragment : Fragment() {
                     }.addOnFailureListener {
                         Toast.makeText(context, "Algo salio mal", Toast.LENGTH_SHORT).show()
                     }
-
-
                 }.addOnFailureListener {
             Toast.makeText(context, "Algo salio mal shavo", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
     private fun asignarFoto(URL: String) {

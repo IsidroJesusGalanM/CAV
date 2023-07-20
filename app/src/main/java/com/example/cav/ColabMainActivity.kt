@@ -55,5 +55,18 @@ class ColabMainActivity : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.agregarMuseo.setOnClickListener {
+            val intent = Intent(this,AgregarMuseoActivity::class.java)
+            startActivity(intent)
+        }
+        binding.agregarExposicion.setOnClickListener {
+            val intent = Intent(this, AgregarExposicionActivity::class.java)
+            startActivity(intent)
+        }
+        binding.misTours.setOnClickListener {
+            val intent = Intent(this,MytoursActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

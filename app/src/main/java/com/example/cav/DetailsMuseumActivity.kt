@@ -26,7 +26,7 @@ class details_museum_activity : AppCompatActivity() {
         val img = Bundle?.getString("imagen")
 
         val imagen = binding.imageMuseum
-        Picasso.get().load(img).centerCrop().into(imagen)
+        Picasso.get().load(img).into(imagen)
         binding.nameMuseum.text = nombre
         binding.descLarga.text = desc
 

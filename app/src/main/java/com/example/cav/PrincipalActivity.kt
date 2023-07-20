@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment
 import com.example.cav.databinding.ActivityPrincipalBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class PrincipalActivity : AppCompatActivity() {
@@ -20,63 +24,61 @@ class PrincipalActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        setup()
+        CoroutineScope(Dispatchers.Main).launch {
+            setup()
+        }
+
         replaceFragment(HomeFragment())
     }
 
-    private fun setup() {
+    private suspend fun setup() {
 
-        binding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> replaceFragment(HomeFragment())
-                R.id.events -> replaceFragment(EventFragment())
-                R.id.guides -> replaceFragment(GuidesFragment())
-                R.id.profile -> replaceFragment(ProfileFragment())
-                else -> {
-                }
-            }
-            true
-        }
-
-        val preferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
-        val email = preferences.getString("email","")
+        withContext(Dispatchers.IO) {
 
 
-        val user = FirebaseAuth.getInstance().currentUser
-        val mail = user?.email
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Usuarios").document(mail.toString()).get().addOnSuccessListener {
-            if (it.exists()){
-                print("existe")
-                if(it.contains("telefono")){
-                     val tel = it.getString("telefono")
-                    if (!tel.toString().isEmpty()){
-                        Toast.makeText(this, "Se tienen registros del telefono", Toast.LENGTH_SHORT).show()
-                        Handler().postDelayed({
-                            badgeClear(R.id.profile)
-                        },1000)
-                    }else{
-                        Toast.makeText(
-                            this,
-                            "No se tienen registros del telefono",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        Handler().postDelayed({
-                            badgeSetup(R.id.profile,1)
-                        },2000)
+            binding.bottomNav.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.home -> replaceFragment(HomeFragment())
+                    R.id.events -> replaceFragment(EventFragment())
+                    R.id.guides -> replaceFragment(GuidesFragment())
+                    R.id.profile -> replaceFragment(ProfileFragment())
+                    else -> {
                     }
-                } else{
-                    print("no existe")
-                    Toast.makeText(this, "Porfavor proporciona un telefono", Toast.LENGTH_SHORT)
-                        .show()
-                    Handler().postDelayed({
-                        badgeSetup(R.id.profile,1)
-                    },2000)
                 }
+                true
             }
-        }.addOnFailureListener {
-            print("algo raro pasa")
-            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT).show()
+
+            val preferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
+            val email = preferences.getString("email", "")
+
+
+            val user = FirebaseAuth.getInstance().currentUser
+            val mail = user?.email
+            val db = FirebaseFirestore.getInstance()
+            db.collection("Usuarios").document(mail.toString()).get().addOnSuccessListener {
+                if (it.exists()) {
+                    print("existe")
+                    if (it.contains("telefono")) {
+                        val tel = it.getString("telefono")
+                        if (!tel.toString().isEmpty()) {
+                            Handler().postDelayed({
+                                badgeClear(R.id.profile)
+                            }, 1000)
+                        } else {
+                            Handler().postDelayed({
+                                badgeSetup(R.id.profile, 1)
+                            }, 2000)
+                        }
+                    } else {
+
+                        Handler().postDelayed({
+                            badgeSetup(R.id.profile, 1)
+                        }, 2000)
+                    }
+                }
+            }.addOnFailureListener {
+                print("algo raro pasa")
+            }
         }
     }
 
@@ -97,7 +99,10 @@ class PrincipalActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransition = fragmentManager.beginTransaction()
         fragmentTransition.replace(R.id.frame_containder,fragment)
-        fragmentTransition.commit()
+
+        fragmentTransition.commitNow()
+
+        supportFragmentManager.executePendingTransactions()
     }
 
 

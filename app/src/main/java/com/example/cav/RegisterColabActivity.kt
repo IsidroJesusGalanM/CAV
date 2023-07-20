@@ -54,14 +54,12 @@ class RegisterColabActivity : AppCompatActivity() {
             val especialidad = binding.especialidad.text.toString()
             val defaultCalif = 4.0
 
-
             val connected = isConnectedToInternet(this)
             if (connected) {
                 val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
                 if (user.isNotEmpty() && password.text!!.isNotEmpty() && confirmation.text!!.isNotEmpty() && name!!.isNotEmpty()
                     && description.isNotEmpty()  && image.toString().isNotEmpty() && especialidad.isNotEmpty()) {
                     if (password.text.toString().equals(confirmation.text.toString())) {
-                        uploadImage(image)
                         FirebaseAuth.getInstance()
                             .createUserWithEmailAndPassword(user, password.text.toString())
                             .addOnCompleteListener {

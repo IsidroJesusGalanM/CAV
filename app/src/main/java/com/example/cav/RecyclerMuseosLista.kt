@@ -52,6 +52,7 @@ class RecyclerMuseosLista: ListAdapter<MuseosLista, RecyclerMuseosLista.ViewHold
             binding.descripcionCorta.text = museo.descC
             val imagen = binding.imagenMuseo
             Picasso.get().load(museo.image).into(imagen)
+
             binding.root.setOnClickListener {
                 onItemClickListener(museo)
             }

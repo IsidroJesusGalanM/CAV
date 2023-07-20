@@ -23,10 +23,12 @@ class HomeFragment : Fragment(){
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val db = FirebaseFirestore.getInstance()
+    var fallo = false
+    var internetConexion = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -55,7 +57,6 @@ class HomeFragment : Fragment(){
                             id.toString().toInt(), nombre!!, descC.toString(),
                             descL.toString(), precio.toString().toInt(), img.toString()
                         )
-                        println(museo)
                         lista.add(museo)
 
                         val adapter = RecyclerMuseosLista()
@@ -72,11 +73,10 @@ class HomeFragment : Fragment(){
                         }
                     }
                 }.addOnFailureListener {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                    fallo = true
                 }
             } else {
-                Toast.makeText(requireContext(), "Sin conexion a internet", Toast.LENGTH_SHORT)
-                    .show()
+                internetConexion = false
             }
         }
     }

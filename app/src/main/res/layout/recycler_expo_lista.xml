@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/card_background_museums"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/nombreExpo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        tools:text="Museo Soumaya"/>
+
+    <ImageView
+        android:id="@+id/imagenExpo"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/nombreExpo"
+        android:layout_marginTop="8dp"
+        android:padding="20dp"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="250dp"/>
+
+    <TextView
+        android:id="@+id/descripcionCorta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/imagenExpo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="lorem ipsum"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

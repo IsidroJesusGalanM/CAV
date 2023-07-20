@@ -4,6 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="16dp"
     tools:context=".AgregarExposicionActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Añador una exposcion"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/title_white"
+        android:textSize="24sp"
+        android:textAlignment="center"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@id/addExpo"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/nombreExpo"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre de la exposición"
+                style="@style/black_textfield"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/propietario"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Propietario"
+                style="@style/black_textfield"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageExpo"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/add_image"
+                android:padding="10dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/descC"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripcion corta"
+                style="@style/black_textfield"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/descL"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripcion Larga"
+                style="@style/black_textfield"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/precio"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripcion Larga"
+                style="@style/black_textfield"
+                android:inputType="number"
+                />
+
+            <Spinner
+                android:id="@+id/selectType"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:entries="@array/spinner_type_expo"
+                android:background="@drawable/white_button_1"
+                android:padding="8dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addExpo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Añadir Exposición"
+        android:background="@drawable/white_button_1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

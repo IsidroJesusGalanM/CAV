@@ -14,4 +14,10 @@
         <item>16:00</item>
         <item>17:00</item>
     </string-array>
+
+    <string-array name="spinner_type_expo">
+        <item>Tipo de exposición:</item>
+        <item>Exposición temporal</item>
+        <item>Exposición Permanente</item>
+    </string-array>
 </resources>

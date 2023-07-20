@@ -11,7 +11,7 @@ class RecyclerVisitasP: ListAdapter<VisitasLista,RecyclerVisitasP.ViewHolder>(Di
 
     companion object DiffCallback:DiffUtil.ItemCallback<VisitasLista>(){
         override fun areItemsTheSame(oldItem: VisitasLista, newItem: VisitasLista): Boolean {
-            return oldItem.idCita == newItem.idCita
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: VisitasLista, newItem: VisitasLista): Boolean {
@@ -30,12 +30,26 @@ class RecyclerVisitasP: ListAdapter<VisitasLista,RecyclerVisitasP.ViewHolder>(Di
         holder.bind(visita)
     }
 
+    lateinit var onItemClickListener: (VisitasLista) -> Unit
+
     inner class ViewHolder(private val binding: RecyclerVisitasListaBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(cita : VisitasLista){
             binding.fecha.text = cita.fecha
             binding.nombreMuseo.text = cita.museum
             binding.nombreGuia.text = cita.guia
             binding.hora.text = cita.hora
+
+            if (cita.status == "pendiente"){
+                binding.linear.setBackgroundResource(R.drawable.white_button_1)
+            }else if(cita.status == "aceptada"){
+                binding.linear.setBackgroundResource(R.drawable.green_button)
+            }else if(cita.status == "declinada"){
+                binding.linear.setBackgroundResource(R.drawable.red_button)
+            }
+
+            binding.root.setOnClickListener {
+                onItemClickListener(cita)
+            }
 
 
         }

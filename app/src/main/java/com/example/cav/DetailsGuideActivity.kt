@@ -38,7 +38,6 @@ class DetailsGuideActivity : AppCompatActivity() {
         binding.especialidadA.text = especialidad
 
         Glide.with(this).load(image).apply(RequestOptions().transform(RoundedCorners(20)))
-            .centerInside()
             .into(imageCorner)
 
         binding.agendar.setOnClickListener {

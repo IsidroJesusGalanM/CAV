@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.example.cav.databinding.ActivityProgramarVisitaBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.random.Random
 
 class ProgramarVisitaActivity : AppCompatActivity() {
     lateinit var binding: ActivityProgramarVisitaBinding
@@ -75,7 +76,6 @@ class ProgramarVisitaActivity : AppCompatActivity() {
             binding.museoName.setText(museoG)
             binding.guiaName.setText(guiaG)
         }
-
         //config botones
         binding.selectMuseo.setOnClickListener {
             val intent = Intent(this,SelectMuseoActivity::class.java)
@@ -91,25 +91,10 @@ class ProgramarVisitaActivity : AppCompatActivity() {
             showDateDialog()
         }
 
-        val spinner = binding.selectHora
-        val spinnerItems = resources.getStringArray(R.array.spinner_hours)
 
-        val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,spinnerItems)
-        spinner.adapter = arrayAdapter
-        spinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        }
         binding.registerCite.setOnClickListener {
-
             val connected = isConnectedToInternet(this)
             if (connected) {
-
-
                 val nombreMuseo = binding.museoName.text.toString()
                 val nombreGuia = binding.guiaName.text.toString()
                 val fecha = binding.fecha.text.toString()
@@ -118,33 +103,43 @@ class ProgramarVisitaActivity : AppCompatActivity() {
                 if (nombreMuseo.isBlank() || nombreGuia.isBlank() || fecha.isBlank() || hora == "Selecciona una hora:") {
                     Toast.makeText(this, "Algun campo esta vacio ", Toast.LENGTH_SHORT).show()
                 } else {
-
-
                     val currentUserR = FirebaseAuth.getInstance().currentUser
                     val mail = currentUserR?.email
                     val textoFinal = "$nombreMuseo con $nombreGuia el dia $fecha a las $hora"
                     binding.pruebaText.text = textoFinal
-
-                    val reference = db.collection("Citas")
-                    val nuevaCita =
-                        hashMapOf(
-                            "nombreMuseo" to nombreMuseo,
-                            "nombreGuia" to nombreGuia,
-                            "fecha" to fecha,
-                            "usuario" to mail,
-                            "hora" to hora,
+                    val referenceGuia = db.collection("Guias")
+                    val query = referenceGuia.whereEqualTo("Nombre",nombreGuia)
+                    query.get().addOnSuccessListener {
+                        val guiaDocument = it.documents[0]
+                        val correoGuia = guiaDocument.getString("Correo")
+                        Toast.makeText(this, correoGuia, Toast.LENGTH_SHORT).show()
+                        val randomNum = generarNumeroCuatroDigitos()
+                        val nameDoc = "cita$correoGuia$randomNum"
+                        db.collection("Citas").document(nameDoc).set(
+                            hashMapOf(
+                                "nombreMuseo" to nombreMuseo,
+                                "nombreGuia" to nombreGuia,
+                                "fecha" to fecha,
+                                "usuario" to mail,
+                                "hora" to hora,
+                                "mailGuia" to correoGuia,
+                                "status" to "pendiente"
+                            )
                         )
-
-                    reference.add(nuevaCita)
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Cita Registrada con exito", Toast.LENGTH_SHORT)
-                                .show()
-                            val intent = Intent(this, PrincipalActivity::class.java)
-                            startActivity(intent)
-                            sharedPreferences.edit().clear().apply()
-                        }.addOnFailureListener {
-                            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT).show()
-                        }
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    this,
+                                    "Cita Registrada con exito",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                                val intent = Intent(this, PrincipalActivity::class.java)
+                                startActivity(intent)
+                                sharedPreferences.edit().clear().apply()
+                            }.addOnFailureListener {
+                                Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
             }else{
                 Toast.makeText(this, "Revisa tu conexion", Toast.LENGTH_SHORT).show()
@@ -186,6 +181,11 @@ class ProgramarVisitaActivity : AppCompatActivity() {
         super.onBackPressed()
         val sharedPreferences = this.getSharedPreferences("visit_data", Context.MODE_PRIVATE)
         sharedPreferences.edit().clear().apply()
+    }
+
+    fun generarNumeroCuatroDigitos(): String {
+        val numeroAleatorio = Random.nextInt(10000) // Genera un número aleatorio entre 0 y 9999
+        return String.format("%04d", numeroAleatorio) // Formatea el número como un String de 4 dígitos con ceros a la izquierda si es necesario
     }
     fun isConnectedToInternet(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

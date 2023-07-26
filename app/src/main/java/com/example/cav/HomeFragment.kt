@@ -1,5 +1,6 @@
 package com.example.cav
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -32,14 +33,18 @@ class HomeFragment : Fragment(){
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
-        CoroutineScope(Dispatchers.Main).launch {
             setup()
-        }
+
         return view
     }
 
-    private suspend fun setup() {
-        withContext(Dispatchers.IO) {
+    private  fun setup() {
+
+        val progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Cargando Info...")
+        progressDialog.setCancelable(false)
+            progressDialog.show()
+
             val connected = isConnectedToInternet(requireContext())
             if (connected) {
                 var id = 0
@@ -53,6 +58,7 @@ class HomeFragment : Fragment(){
                         val descC = document.getString("DescC")
                         val precio = document.getString("Precio")
                         val img = document.getString("Imagen")
+
                         val museo = MuseosLista(
                             id.toString().toInt(), nombre!!, descC.toString(),
                             descL.toString(), precio.toString().toInt(), img.toString()
@@ -72,13 +78,13 @@ class HomeFragment : Fragment(){
                             startActivity(intent)
                         }
                     }
+                    if(progressDialog.isShowing)progressDialog.dismiss()
                 }.addOnFailureListener {
                     fallo = true
                 }
             } else {
-                internetConexion = false
+                Toast.makeText(requireContext(), "Sin conexion a internet", Toast.LENGTH_SHORT).show()
             }
-        }
     }
 
     fun isConnectedToInternet(context: Context): Boolean {

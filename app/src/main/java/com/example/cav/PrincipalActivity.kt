@@ -18,6 +18,8 @@ import kotlinx.coroutines.withContext
 
 class PrincipalActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityPrincipalBinding
+
+    private var lastTrasaction:Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
@@ -29,28 +31,32 @@ class PrincipalActivity : AppCompatActivity() {
         }
 
         replaceFragment(HomeFragment())
+
+        binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
+
+            val currentTime = System.currentTimeMillis()
+
+            if (currentTime - lastTrasaction > 500) {
+            when (menuItem.itemId) {
+                R.id.home -> replaceFragment(HomeFragment())
+                R.id.events -> replaceFragment(EventFragment())
+                R.id.guides -> replaceFragment(GuidesFragment())
+                R.id.profile -> replaceFragment(ProfileFragment())
+                else -> {
+                }
+            }
+                lastTrasaction = currentTime
+
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
     }
 
     private suspend fun setup() {
 
         withContext(Dispatchers.IO) {
-
-
-            binding.bottomNav.setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.home -> replaceFragment(HomeFragment())
-                    R.id.events -> replaceFragment(EventFragment())
-                    R.id.guides -> replaceFragment(GuidesFragment())
-                    R.id.profile -> replaceFragment(ProfileFragment())
-                    else -> {
-                    }
-                }
-                true
-            }
-
             val preferences = getSharedPreferences("auth", Context.MODE_PRIVATE)
             val email = preferences.getString("email", "")
-
 
             val user = FirebaseAuth.getInstance().currentUser
             val mail = user?.email
@@ -70,7 +76,6 @@ class PrincipalActivity : AppCompatActivity() {
                             }, 2000)
                         }
                     } else {
-
                         Handler().postDelayed({
                             badgeSetup(R.id.profile, 1)
                         }, 2000)
@@ -82,8 +87,10 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
+
     fun badgeSetup(id: Int,alerts:Int){
         val badge = binding.bottomNav.getOrCreateBadge(id)
+
         badge.isVisible = true
         badge.number = alerts
     }
@@ -100,10 +107,7 @@ class PrincipalActivity : AppCompatActivity() {
         val fragmentTransition = fragmentManager.beginTransaction()
         fragmentTransition.replace(R.id.frame_containder,fragment)
 
-        fragmentTransition.commitNow()
+        fragmentTransition.commit()
 
-        supportFragmentManager.executePendingTransactions()
     }
-
-
 }

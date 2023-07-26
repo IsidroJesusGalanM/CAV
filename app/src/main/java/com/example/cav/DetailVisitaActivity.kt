@@ -108,6 +108,7 @@ class DetailVisitaActivity : AppCompatActivity() {
         ).addOnSuccessListener {
             Toast.makeText(this, "Visita Aceptada", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MytoursActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
         }
@@ -119,6 +120,7 @@ class DetailVisitaActivity : AppCompatActivity() {
         ).addOnSuccessListener {
             Toast.makeText(this, "Visita Declinada", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MytoursActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
         }

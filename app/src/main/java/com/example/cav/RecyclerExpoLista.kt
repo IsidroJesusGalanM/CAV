@@ -40,6 +40,7 @@ class RecyclerExpoLista: ListAdapter<ExpoLista, RecyclerExpoLista.ViewHolder>(Di
             val image = binding.imagenExpo
             Picasso.get().load(expo.imagen).into(image)
             binding.descripcionCorta.text = expo.descC
+            binding.precio.text = "Precio: ${expo.precio}"
         }
     }
 }

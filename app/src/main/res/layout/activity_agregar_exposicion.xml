@@ -83,7 +83,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Descripcion Larga"
+                android:hint="Precio"
                 style="@style/black_textfield"
                 android:inputType="number"
                 />

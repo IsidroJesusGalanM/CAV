@@ -33,17 +33,15 @@ class HomeFragment : Fragment(){
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
-            setup()
+        setup()
 
         return view
     }
 
     private  fun setup() {
 
-        val progressDialog = ProgressDialog(requireContext())
-        progressDialog.setMessage("Cargando Info...")
-        progressDialog.setCancelable(false)
-            progressDialog.show()
+        val loading = LoadingDialog(requireActivity())
+        loading.startLoading()
 
             val connected = isConnectedToInternet(requireContext())
             if (connected) {
@@ -78,7 +76,7 @@ class HomeFragment : Fragment(){
                             startActivity(intent)
                         }
                     }
-                    if(progressDialog.isShowing)progressDialog.dismiss()
+                    loading.isDissmiss()
                 }.addOnFailureListener {
                     fallo = true
                 }

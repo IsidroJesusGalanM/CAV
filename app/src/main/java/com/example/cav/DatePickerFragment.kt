@@ -12,7 +12,6 @@ import java.util.Calendar
 
 class DatePickerFragment(val listener:(day:Int,month:Int,year:Int) -> Unit): DialogFragment(),
     DatePickerDialog.OnDateSetListener{
-
     override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
         listener(day,month,year)
     }
@@ -23,6 +22,7 @@ class DatePickerFragment(val listener:(day:Int,month:Int,year:Int) -> Unit): Dia
         val month = c.get(Calendar.MONTH)
         val year = c.get(Calendar.YEAR)
 
+        c.set(year - 3, month, day)
         val picker = DatePickerDialog(activity as Context,R.style.datePickerTheme,this,year,month,day)
 
         picker.datePicker.minDate = c.timeInMillis
@@ -36,6 +36,4 @@ class DatePickerFragment(val listener:(day:Int,month:Int,year:Int) -> Unit): Dia
 
         return picker
     }
-
-
 }

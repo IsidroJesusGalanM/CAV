@@ -26,12 +26,12 @@ class EventFragment : Fragment() {
         val view = binding.root
 
         binding.botonP.setOnClickListener {
-            val intent = Intent(context,PermanentExpoActivity::class.java)
+            val intent = Intent(context,PermanentExpoConsult::class.java)
             startActivity(intent)
         }
 
         binding.botonT.setOnClickListener {
-            val intent = Intent(context,TemporallyExpoActivity::class.java)
+            val intent = Intent(context,TemporalExpoConsul::class.java)
             startActivity(intent)
         }
 

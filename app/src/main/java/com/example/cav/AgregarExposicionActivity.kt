@@ -31,8 +31,6 @@ class AgregarExposicionActivity : AppCompatActivity() {
         firebaseFirestore = FirebaseFirestore.getInstance()
 
         setup()
-
-
     }
 
     private fun setup() {
@@ -124,7 +122,6 @@ class AgregarExposicionActivity : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val fileName = formatter.format(now)
-
         val storageReference = firebaseStorage.getReference("ExposImg/$fileName")
         storageReference.putFile(imageUri).addOnSuccessListener {
             storageReference.downloadUrl.addOnSuccessListener {

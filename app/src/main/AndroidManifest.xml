@@ -10,17 +10,22 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.CAV"
         tools:targetApi="31">
+
         <activity
             android:name=".AgregarExposicionWB"
+            android:usesCleartextTraffic="true"
             android:exported="false" />
         <activity
             android:name=".TemporalExpoConsul"

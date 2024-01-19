@@ -30,7 +30,7 @@ class TemporalExpoConsul : AppCompatActivity() {
     }
 
     private suspend fun requestData() {
-        val url = "http://192.168.1.161/crud/consultar.php"
+        val url = "http://192.168.1.197:5555/BuscarExpoTemp.php"
         val recycler = binding.recycler
         recycler.layoutManager = LinearLayoutManager(this)
         try {
@@ -56,7 +56,7 @@ class TemporalExpoConsul : AppCompatActivity() {
             for (i in 0 until response.length()) {
                 val jsonObject = response.getJSONObject(i)
                 val id = jsonObject.getInt("id")
-                val nombre = jsonObject.getString("nombre")
+                val nombre = jsonObject.getString("nombreExpo")
                 val precio = jsonObject.getString("precio")
                 val imagen = jsonObject.getString("imagen")
                 val descC = jsonObject.getString("descC")

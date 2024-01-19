@@ -61,7 +61,7 @@ class ColabMainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.agregarExposicion.setOnClickListener {
-            val intent = Intent(this, AgregarExposicionActivity::class.java)
+            val intent = Intent(this, AgregarExposicionWB::class.java)
             startActivity(intent)
         }
         binding.misTours.setOnClickListener {

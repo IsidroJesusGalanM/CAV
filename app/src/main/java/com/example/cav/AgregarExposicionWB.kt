@@ -65,7 +65,7 @@ class AgregarExposicionWB : AppCompatActivity() {
         val descC = binding.descC.text.toString()
         val descL = binding.descL.text.toString()
         val precio = binding.precio.text.toString()
-            val url = "http://192.168.1.197:5555/ws_insertarExpoTemp.php"
+            val url = "http://172.20.10.5:5552/ws_insertarExpoTemp.php"
             try {
             val response = withContext(Dispatchers.IO) {
 
@@ -134,7 +134,7 @@ class AgregarExposicionWB : AppCompatActivity() {
             val descC = binding.descC.text.toString()
             val descL = binding.descL.text.toString()
             val precio = binding.precio.text.toString()
-            val url = "http://192.168.1.197:5555/ws_insertarExpoPerma.php"
+            val url = "http://172.20.10.5:5552/ws_insertarExpoPerma.php"
             try {
                 val response = withContext(Dispatchers.IO) {
 

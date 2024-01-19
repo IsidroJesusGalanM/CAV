@@ -2,6 +2,7 @@ package com.example.cav
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
@@ -30,7 +31,7 @@ class TemporalExpoConsul : AppCompatActivity() {
     }
 
     private suspend fun requestData() {
-        val url = "http://192.168.1.197:5555/BuscarExpoTemp.php"
+        val url = "http://172.20.10.5:5552/BuscarExpoTemp.php"
         val recycler = binding.recycler
         recycler.layoutManager = LinearLayoutManager(this)
         try {
@@ -71,6 +72,7 @@ class TemporalExpoConsul : AppCompatActivity() {
                 recycler.adapter = adapter
                 recycler.layoutManager = LinearLayoutManager(applicationContext)
                 adapter.submitList(dataItems)
+                binding.placeHolderText.visibility = View.GONE
             }
         }catch (e:Exception){
             withContext(Dispatchers.Main) {

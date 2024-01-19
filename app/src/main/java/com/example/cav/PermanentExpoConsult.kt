@@ -32,12 +32,11 @@ class PermanentExpoConsult : AppCompatActivity() {
         }
     }
     private suspend fun requestData() {
-        val url = "http://192.168.1.197:5555/BuscarExpoPerma.php"
+        val url = "http://172.20.10.5:5552/BuscarExpoPerma.php"
         val recycler = binding.recycler
         recycler.layoutManager = LinearLayoutManager(this)
 
         try {
-
             val response = withContext(Dispatchers.IO){
                 val requestQueue = Volley.newRequestQueue(this@PermanentExpoConsult)
                 val completableDeferred = CompletableDeferred<JSONArray>()
